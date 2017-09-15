@@ -1,0 +1,19 @@
+.container {
+    margin: auto;
+}
+.remember-me {
+    text-align: center;
+}
+.btn-login {
+    width: 100%;
+}
+.input-group-btn{
+	display: inline-block;
+}
+.form-control {
+	width:250px !important;
+	display: inline-block !important;
+}
+.search-form{
+	    display: inline-block
+}

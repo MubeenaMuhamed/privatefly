@@ -1,0 +1,111 @@
+<html xmlns="http://thymeleaf.org">
+<head>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"
+	type="text/css"></link>
+<link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+</script>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">airfieldName</a>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+			data-target="#myModal">Add Aircraft</button>
+		<a href="sorted-list">
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal">
+				Sorted List</button>
+		</a>
+		<form class="search-form" action="/search-by-aircraft" method="get">
+			<input type="text" name="airfield" class="form-control"
+				placeholder="Search for..." /> <span
+				class="input-group-btn pull right">
+				<button class="btn btn-default" type="submit">Search</button>
+			</span>
+		</form>
+		<h2>Aircraft List</h2>
+		<div class="container">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Aircraft</th>
+						<th>Airfield Name</th>
+						<th>ICAOCode</th>
+						<th>dateOpened</th>
+						<th>runwayLength</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="aircraft : ${aircrafts}">
+						<td th:text="${aircraft.aircraftname}"></td>
+						<td th:text="${aircraft.airfield}"></td>
+						<td th:text="${aircraft.ICAO_code}"></td>
+						<td th:text="${aircraft.openedDate}"></td>
+						<td th:text="${aircraft.runway_length}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						&times;</button>
+					<h4 class="modal-title">Add</h4>
+				</div>
+				<div class="modal-body">
+					<form th:object="${aircraft}" action="/add-aircrafts" method="post">
+						<div class="form-group">
+							<label for="aircraft_name"> Aircraft: </label> <input
+								required="true" type="text" class="form-control"
+								id="aircraft_name" placeholder="Enter Aircraft"
+								name="aircraft_name" />
+						</div>
+						<div class="form-group">
+							<label for="airfieldName"> Airfield Name: </label> <input
+								required="true" type="text" class="form-control"
+								id="airfieldName" placeholder="Enter name" name="airfield" />
+						</div>
+						<div class="form-group">
+							<label for="ICAOCode"> ICAOCode: </label> <input required="true"
+								type="text" class="form-control" id="ICAOCode"
+								placeholder="Enter ICAOCode" name="ICAO_code" />
+						</div>
+						<div class="form-group">
+							<label for="dateOpened" class="col-2 col-form-label">
+								Date </label>
+							<div class="col-10">
+								<input required="true" class="form-control" type="date"
+									value="2011-08-19" id="dateOpened" name="openedDate" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="runwayLength"> Runway Length: </label> <input
+								required="true" type="text" class="form-control"
+								id="runwayLength" placeholder="Enter runwayLength"
+								name="runway_length" />
+						</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
