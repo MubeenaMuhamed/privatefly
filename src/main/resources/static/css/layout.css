@@ -1,19 +1,82 @@
 .container {
-    margin: auto;
+	margin: 0;
+	width: 100%;
+	padding: 0;
 }
+
 .remember-me {
-    text-align: center;
+	text-align: center;
 }
+
 .btn-login {
-    width: 100%;
+	width: 100%;
 }
-.input-group-btn{
+
+.input-group-btn {
 	display: inline-block;
 }
+
 .form-control {
-	width:250px !important;
+	width: 360px !important;
+}
+
+.search-form {
+	display: inline-block;
+	float: right;
+}
+
+.form-control-search {
+	width: 250px !important;
 	display: inline-block !important;
 }
-.search-form{
-	    display: inline-block
+
+.modal-content {
+	width: 400px;
+}
+
+.header-bar {
+	padding: 15px;
+	background-color: teal;
+}
+
+.list-heading {
+	margin: 0;
+	font-size: 33px;
+	background-color: cadetblue;
+	text-align: center;
+	color: white;
+	text-transform: uppercase;
+}
+
+.navbar {
+	border-radius: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+tr:nth-child(even) {
+	background: #CCC
+}
+
+tr:nth-child(odd) {
+	background: #eae5e5
+}
+
+.table-heading {
+	background-color: black !important;
+	color: white;
+	text-transform: uppercase;
+}
+
+.modal-header {
+	background-color: cadetblue;
+	color: white;
+	text-transform: uppercase;
+}
+
+.modal-body {
+	background-color: aliceblue;
+}
+.modal-footer {
+	background-color: cadetblue;
+	padding: 7px !important;
 }
