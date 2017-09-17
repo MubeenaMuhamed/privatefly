@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class HomeController {
 		if (logger.isDebugEnabled()) {
 			logger.debug("viewHome is executed!");
 		}
-		Iterable<PrivateFlyModel> aircrafts = privateFlyDAO.findAll();
+		List<PrivateFlyModel> aircrafts = privateFlyDAO.findAll();
 		map.addAttribute("aircrafts", aircrafts);
 		return "index";
 	}
@@ -55,7 +56,7 @@ public class HomeController {
 
 	@RequestMapping("/sorted-list")
 	public String sortedAircraft(ModelMap map) {
-		Iterable<PrivateFlyModel> aircrafts = privateFlyDAO.findAllByOrderByAirfieldAsc();
+		List<PrivateFlyModel> aircrafts = privateFlyDAO.findAllByOrderByAirfieldAsc();
 		map.addAttribute("aircrafts", aircrafts);
 		return "index";
 	}
