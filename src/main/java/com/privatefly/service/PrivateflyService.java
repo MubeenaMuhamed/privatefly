@@ -14,14 +14,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.privatefly.controller.HomeController;
+import com.privatefly.controller.PrivateflyApiController;
 import com.privatefly.model.PrivateFlyDAO;
 import com.privatefly.model.PrivateFlyModel;
 
 @Service
 public class PrivateflyService {
 
-	private static final Logger logger = Logger.getLogger(HomeController.class);
+	private static final Logger logger = Logger.getLogger(PrivateflyApiController.class);
 	
 	@Autowired
 	private PrivateFlyDAO privateFlyDAO;
@@ -32,7 +32,7 @@ public class PrivateflyService {
 
 	public void createNewAircraft(String aircraftname, String airfield, String ICAO_code, String openedDate,
 		String runwayLength){
-		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date startDate = df.parse(openedDate);;
 			PrivateFlyModel aircraft = new PrivateFlyModel(aircraftname, airfield, ICAO_code, startDate,

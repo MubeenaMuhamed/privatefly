@@ -9,6 +9,69 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
 </script>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$.ajax({
+		url : "http://localhost:8085/api/aircrafts",
+		success : function(result) {
+			createData(result);
+		}
+	});
+	
+	$(".sort").on("click", function(){
+		$.ajax({
+			url : "http://localhost:8085/api/sorted-aircrafts",
+			success : function(result) {
+				createData(result);
+			}
+		});
+	});
+	
+	$(".search").on("click", function(){
+		var airfieldName = $('#searchField').val();
+		$.ajax({
+			url : "http://localhost:8085/api/aircraft/" + airfieldName,
+			success : function(result) {
+				var tableData = "<tr><td>" + result.aircraftname + "</td><td>" + result.airfield + "</td><td>"
+				+ result.icao_code + "</td><td>" +( new Date(result.openedDate).toDateString())
+			
+				+ "</td><td>" + result.runway_length + "</td></tr>";
+				$('table tbody').html(tableData);
+			}
+		});
+	});
+	
+	
+	$(".addAircraft").on("click", function(){
+		var aircraft = $('#aircraft_name').val();
+		var airfieldName = $('#airfieldName').val();
+		var icaoCode = $('#ICAOCode').val();
+		var openedDate = $('#dateOpened').val();
+		var runwayLength = $('#runwayLength').val();
+		$.ajax({
+			  method: "POST",
+			  url: "http://localhost:8085/api/aircraft",
+			  data: { aircraft_name: aircraft,airfield: airfieldName, ICAO_code: icaoCode, openedDate: openedDate, runway_length: runwayLength},
+			  success: function() {
+				  location.reload();
+			  }			
+		})
+	});		
+
+
+});
+function createData(result) {
+	var tableData = "";
+	
+	result.forEach(function(key, index) {
+			tableData += "<tr><td>" + key.aircraftname + "</td><td>"
+					+ key.airfield + "</td><td>" + key.icao_code + "</td><td>" + ( new Date(key.openedDate).toDateString()) + "</td>" + "<td>"
+					+ key.runway_length + "</td></tr>"
+		});
+		$('table tbody').html(tableData);
+	}
+</script>
 </head>
 
 <body>
@@ -22,14 +85,13 @@
 	<div class="container">
 		<div class="header-bar"><button type="button" class="btn btn-info" data-toggle="modal"
 			data-target="#myModal">Add Aircraft</button>
-		<a href="sorted-list" class="btn btn-info">Sorted List</a>
-		<form class="search-form" action="/search-by-aircraft" method="get">
-			<input type="text" name="airfield" class="form-control form-control-search"
+		<a class="btn btn-info sort">Sorted List</a>
+		<input type="text" name="airfield" id="searchField" class="form-control form-control-search"
 				placeholder="Search for..." /> <span
 				class="input-group-btn pull right">
-				<button class="btn btn-info" type="submit"><span class="glyphicon glyphicon-search"></span>Search </button>
+				<button class="btn btn-info search" type="submit"><span class="glyphicon glyphicon-search"></span>Search </button>
 			</span>
-		</form></div>
+		</div>
 		<div class="list-heading">Aircraft List</div>
 		<div class="container">
 			<table class="table">
@@ -43,13 +105,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="aircraft : ${aircrafts}">
-						<td th:text="${aircraft.aircraftname}"></td>
-						<td th:text="${aircraft.airfield}"></td>
-						<td th:text="${aircraft.ICAO_code}"></td>
-						<td th:text="${aircraft.openedDate}"></td>
-						<td th:text="${aircraft.runway_length}"></td>
-					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -63,7 +118,6 @@
 					<h4 class="modal-title">Add Aircraft</h4>
 				</div>
 				<div class="modal-body">
-					<form th:object="${aircraft}" action="/add-aircrafts" method="post">
 						<div class="form-group">
 							<label class="col-4 col-form-label" for="aircraft_name"> Aircraft: </label> <input
 								required="true" type="text" class="form-control"
@@ -92,8 +146,7 @@
 								id="runwayLength" placeholder="Enter runwayLength"
 								name="runway_length" />
 						</div>
-						<button type="submit" class="btn btn-info">Submit</button>
-					</form>
+						<button type="button" class="btn btn-info addAircraft">Submit</button>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">
