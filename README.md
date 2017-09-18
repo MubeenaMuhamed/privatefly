@@ -7,6 +7,9 @@ It provide facilities to add, search, sort and list the aircraft details.
 1. JDK 1.8
 2. Maven 3.1
 3. Create a MySQL database with required name(eg:privatefly), the same should be specified in the `application.properties` file.
+```
+create database privatefly;
+```
 
 ## Technologies used
 
