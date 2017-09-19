@@ -35,10 +35,10 @@
 				$(".search").on(
 						"click",
 						function() {
-							var airfieldName = $('#searchField').val();
+							var aircraftname = $('#searchField').val();
 							$.ajax({
 								url : "http://localhost:8085/api/aircraft/"
-										+ airfieldName,
+										+ aircraftname,
 								success : function(result) {
 									var tableData = "<tr><td>"
 											+ result.aircraftname
@@ -99,7 +99,7 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">PrivateFly Aircraft Services</a>
+				<a class="navbar-brand" href="/">PrivateFly Aircraft Services</a>
 			</div>
 		</div>
 	</nav>

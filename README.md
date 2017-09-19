@@ -14,8 +14,12 @@ create database privatefly;
 ## Technologies used
 
 1. Spring Boot
-2. Thymeleaf
-3. Apache Log4j
+2. Spring JPA
+3. Spring REST
+4. Thymeleaf
+5. Log4j
+6. JUnit
+
 
 ## Configurations
 

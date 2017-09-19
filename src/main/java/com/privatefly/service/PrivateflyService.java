@@ -30,24 +30,18 @@ public class PrivateflyService {
 		return privateFlyDAO.findAll();
 	}
 
-	public void createNewAircraft(String aircraftname, String airfield, String ICAO_code, String openedDate,
-		String runwayLength){
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			Date startDate = df.parse(openedDate);;
-			PrivateFlyModel aircraft = new PrivateFlyModel(aircraftname, airfield, ICAO_code, startDate,
-					runwayLength);
-			privateFlyDAO.save(aircraft);
-		} catch (ParseException e) {
-			logger.info(e);
-		}
+	public void createNewAircraft(PrivateFlyModel aircraft){
+		privateFlyDAO.save(aircraft);
 	}
 	public List<PrivateFlyModel> sortedAircraftList(){
 		return privateFlyDAO.findAllByOrderByAirfieldAsc();
 	}
-	public PrivateFlyModel searchByAirfieldName(String airfield){
-		return privateFlyDAO.findByAircraftname(airfield);
+	public PrivateFlyModel searchByAircraftName(String aircraftname){
+		return privateFlyDAO.findByAircraftname(aircraftname);
 		
+	}
+	public boolean exists(PrivateFlyModel aircraft) {
+	        return searchByAircraftName(aircraft.getAircraftname()) != null;
 	}
 	
 }
