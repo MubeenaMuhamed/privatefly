@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,7 +29,7 @@ public class PrivateflyApiController {
 	private PrivateflyService privateflyService;
 
 	@RequestMapping("/aircrafts")
-	public ResponseEntity<Iterable<PrivateFlyModel>> viewHome(ModelMap map) {
+	public ResponseEntity<Iterable<PrivateFlyModel>> viewHome() {
 
 		List<PrivateFlyModel> aircrafts = privateflyService.getAllAircrafts();
 		logger.info("Listed all aircrafts");
@@ -55,7 +54,7 @@ public class PrivateflyApiController {
 	}
 
 	@RequestMapping("/sorted-aircrafts")
-	public ResponseEntity<Iterable<PrivateFlyModel>> sortedAircraft(ModelMap map) {
+	public ResponseEntity<Iterable<PrivateFlyModel>> sortedAircraft() {
 		List<PrivateFlyModel> aircrafts = privateflyService.sortedAircraftList();
 		logger.info("Get all aircrafts in ascending order");
 		return new ResponseEntity<Iterable<PrivateFlyModel>>(aircrafts, HttpStatus.OK);
